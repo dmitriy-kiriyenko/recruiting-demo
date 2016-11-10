@@ -20,4 +20,3 @@ end
 folder1.images.create(file: seed_image('1.jpeg'))
 folder1.images.create(file: seed_image('2.png'))
 folder2.images.create(file: seed_image('3.jpg'))
-

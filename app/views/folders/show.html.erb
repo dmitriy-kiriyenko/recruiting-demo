@@ -1,13 +1,13 @@
 <p><%= link_to 'Back to your folders', folders_path %></p>
-<h1><%= @folder.name %></h1>
+<h1><%= folder.name %></h1>
 
-<%= simple_form_for [@folder, Image.new] do |f| %>
+<%= simple_form_for [folder, Image.new] do |f| %>
   <%= f.input :file, label: false %>
   <%= f.submit 'Upload' %>
 <% end %>
 
 <ul>
-  <% @folder.images.each do |image| %>
+  <% folder.images.each do |image| %>
     <li><%= image_tag image.file.url %></li>
   <% end %>
 </ul>

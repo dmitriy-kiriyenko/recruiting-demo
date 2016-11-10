@@ -6,23 +6,43 @@ class FoldersController < ApplicationController
     @folders = scope.all
   end
 
+  def show
+  end
+
   def new
-    @folder = scope.new
   end
 
   def create
-    @folder = scope.create folder_params
-    respond_with(@folder)
+    respond_with(folder)
   end
 
-  def show
-    @folder = scope.find(params[:id])
+  def edit
+  end
+
+  def update
+    if folder.update_attributes(folder_params)
+      flash[:notice] =  'Folder updated'
+    end
+
+    respond_with folder
+  end
+
+  def destroy
+    folder.destroy
+    flash[:notice] = 'Folder removed'
+
+    respond_with folder
   end
 
   private
 
   def scope
     current_user.folders
+  end
+
+  helper_method :folder
+  def folder
+    @folder ||= scope.find(params[:id])
   end
 
   def folder_params

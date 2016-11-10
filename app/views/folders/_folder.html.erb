@@ -1,1 +1,5 @@
-<li><%= link_to folder.name, folder %></li>
+<li>
+  <span><%= link_to folder.name, folder %></span>
+  <span><%= link_to 'Edit', edit_folder_path(folder) %></span>
+  <span><%= link_to 'Delete', folder_path(folder), method: :delete %></span>
+</li>
