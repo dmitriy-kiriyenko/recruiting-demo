@@ -1,0 +1,9 @@
+<h1>Your folders</h1>
+
+<%= link_to 'New folder', new_folder_path %>
+
+<ul>
+  <% @folders.each do |folder| %>
+    <%= render 'folder', folder: folder %>
+  <% end %>
+</ul>
