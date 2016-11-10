@@ -16,22 +16,22 @@ ActiveRecord::Schema.define(version: 20161110135556) do
   enable_extension "plpgsql"
 
   create_table "folders", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "file"
-    t.integer  "folder_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "file",       default: "", null: false
+    t.integer  "folder_id",               null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["folder_id"], name: "index_images_on_folder_id", using: :btree
   end
 
   create_table "rights", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "folder_id"
+    t.integer  "user_id",    null: false
+    t.integer  "folder_id",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["folder_id"], name: "index_rights_on_folder_id", using: :btree
