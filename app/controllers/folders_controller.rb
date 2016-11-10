@@ -1,4 +1,5 @@
 class FoldersController < ApplicationController
+  before_action :authenticate_user!
   respond_to :html
 
   def index
@@ -21,7 +22,7 @@ class FoldersController < ApplicationController
   private
 
   def scope
-    Folder.all
+    current_user.folders
   end
 
   def folder_params
