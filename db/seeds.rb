@@ -17,6 +17,8 @@ def seed_image(file_name)
   File.open(File.join(Rails.root, "/db/seed/#{file_name}"))
 end
 
-folder1.images.create(file: seed_image('1.jpeg'))
-folder1.images.create(file: seed_image('2.png'))
-folder2.images.create(file: seed_image('3.jpg'))
+folder1.images.create(file: seed_image('alex.jpeg'))
+folder1.images.create(file: seed_image('dima.png'))
+folder2.images.create(file: seed_image('kris.jpg'))
+
+p 'Updated...'
