@@ -18,7 +18,7 @@
     <% @folder.images.each do |image| %>
       <li>
         <%= check_box_tag 'image_ids[]', image.id, false, id: "image_ids_#{image.id}" %>
-        <%= label_tag "image_ids_#{image.id}", image_tag( image.file.url, size: '100x100') %>
+        <%= label_tag "image_ids_#{image.id}", image_tag(image.file.url, size: '100x100') %>
         <%= link_to image.name, [@folder, image] %>
         <% if image.label_list.present? %>
           <small>(<%= image.label_list %>)</small>

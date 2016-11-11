@@ -1,6 +1,8 @@
 <h1>Your folders</h1>
-
-<%= link_to 'New folder', new_folder_path %>
+<ul>
+  <li><%= link_to 'New folder', new_folder_path %></li>
+  <li><%= link_to 'Search files', image_search_path %></li>
+</ul>
 
 <ul>
   <% @folders.each do |folder| %>

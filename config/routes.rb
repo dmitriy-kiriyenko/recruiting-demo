@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
     resources :rights
   end
-
   resources :comments do
     resources :comments
   end
+  resource :image_search
 end

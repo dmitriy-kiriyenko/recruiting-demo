@@ -1,0 +1,24 @@
+<h1>Search files</h1>
+
+<p><%= link_to 'Back to your folders', folders_path %></p>
+
+<%= simple_form_for @search, url: image_search_path, method: :get do |f| %>
+  <%= f.collection_check_boxes :labels, f.object.all_tags, :name, :name %>
+  <%= f.submit 'Search' %>
+<% end %>
+
+<% if @images.present? %>
+  <ul>
+    <% @images.each do |image| %>
+      <li>
+        <%= image_tag(image.file.url, size: '100x100') %>
+        <%= link_to image.name, [image.folder, image] %>
+        <% if image.label_list.present? %>
+          <small>(<%= image.label_list %>)</small>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No files found</p>
+<% end %>
