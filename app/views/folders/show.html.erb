@@ -19,7 +19,7 @@
       <li>
         <%= check_box_tag 'image_ids[]', image.id, false, id: "image_ids_#{image.id}" %>
         <%= label_tag "image_ids_#{image.id}", image_tag( image.file.url, size: '100x100') %>
-        <%= link_to image.name, [@folder, image] %>
+        <%= link_to image.name, [:edit, @folder, image] %>
       </li>
     <% end %>
   </ul>

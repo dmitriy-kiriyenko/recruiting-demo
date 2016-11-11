@@ -2,7 +2,7 @@ class ImagesController < ApplicationController
   respond_to :html
   helper_method :folder
 
-  def show
+  def edit
     @image = folder.images.find params[:id]
   end
 
