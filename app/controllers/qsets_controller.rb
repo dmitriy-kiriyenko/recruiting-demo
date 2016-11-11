@@ -7,6 +7,16 @@ class QsetsController < ApplicationController
     @qset = Qset.find(params[:id])
   end
 
+  def finish
+    total_value = 0
+    params[:questions].keys.each do |question_id|
+      puts "Key #{question_id} ANS ID: #{params[:questions][question_id]}"
+      answer = Answer.where(id: params[:questions][question_id]).first
+      total_value += answer.question.value if answer && answer.correct?
+    end
+    render plain: total_value
+  end
+
   def index
     @qsets = Qset.all
   end

@@ -1,1 +1,22 @@
-START QSET
+<h1><%= @qset.name %> Started</h1>
+
+<%= form_tag(finish_qset_path(@qset), id: "qset_form") do %>
+
+    <% @qset.questions.each do |question| %>
+        <div class="question">
+          <h3><%= question.question %></h3>
+          <div class="answers">
+            <% question.answers.each do |ans| %>
+                <%= ans.correct %>
+                <%= radio_button_tag "questions[#{question.id}]", ans.id, false %>
+                <%= label_tag "question[#{question.id}]_#{ans.id}", ans.answer %>
+                <br/>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+
+    <br/>
+    <%= submit_tag "Done" %>
+
+<% end %>

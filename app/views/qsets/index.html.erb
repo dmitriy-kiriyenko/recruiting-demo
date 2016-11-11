@@ -12,7 +12,8 @@
   <tbody>
     <% @qsets.each do |qset| %>
       <tr>
-        <td><%= link_to 'Show', qset %></td>
+
+        <td><%= link_to qset.name, qset %></td>
         <td><%= link_to 'Edit', edit_qset_path(qset) %></td>
         <td><%= link_to 'Destroy', qset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -30,7 +31,7 @@
     <div class="avail_questionnaires">
       <% current_user.qsets.each do |qset| %>
           <div class="avail_questionnaires">
-            <%= qset.id %>
+            <%= qset.name %>
             <%= link_to "Start", start_qset_path(qset) %>
           </div>
       <% end %>

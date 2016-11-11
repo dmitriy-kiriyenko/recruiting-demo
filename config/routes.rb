@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :qsets do
     get 'start', on: :member
+    post 'finish', on: :member
   end
 
   resources :questions do
