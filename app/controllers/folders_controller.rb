@@ -1,6 +1,7 @@
 class FoldersController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
+  helper_method :folder
 
   def index
     @folders = scope.all
@@ -40,9 +41,8 @@ class FoldersController < ApplicationController
     current_user.folders
   end
 
-  helper_method :folder
   def folder
-    @folder ||= scope.find(params[:id])
+    @_folder ||= scope.find(params[:id])
   end
 
   def folder_params
