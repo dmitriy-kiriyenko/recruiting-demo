@@ -1,4 +1,7 @@
 class Folder < ApplicationRecord
+  include PublicActivity::Model
+  tracked
+
   validates :name, presence: true
 
   has_many :images, dependent: :destroy
