@@ -1,15 +1,20 @@
-class Questionnaire < ApplicationRecord
-  has_many :answers, inverse_of: :questionnaire, dependent: :destroy
+class Question < ApplicationRecord
+  has_many :answers, inverse_of: :question, dependent: :destroy
   accepts_nested_attributes_for :answers, reject_if: proc { |attr| attr['answer'].blank? }, allow_destroy: true
 
   validates :question, presence: true
-  belongs_to :owner, foreign_key: :owner_id, class_name: User
-  has_many :user_questionnaires, dependent: :destroy
-  has_many :users, through: :user_questionnaires
+
+  belongs_to :qset, optional: true
+ #has_many :qsets
+
+  has_many :question_qsets, dependent: :destroy
+  has_many :qsets, through: :user_qsets
+
+
 
   validate :must_have_right_answer,  on: [:create , :update]
 
-  default_scope { order("questionnaires.created_at DESC") }
+  default_scope { order("questions.created_at DESC") }
 
   def must_have_right_answer
     errors.add(:base, "must_have_right_answer") if answers.select{|a| a.correct>0 }.empty?

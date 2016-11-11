@@ -1,5 +1,6 @@
-<%= simple_form_for(@questionnaire) do |f| %>
-    <%= f.error_notification %>
+ERRS: <%= @question.errors.inspect %>
+
+<%= simple_form_for(@question) do |f| %>
 
     <div class="form-inputs">
       <%= f.input :question %>
@@ -23,7 +24,9 @@
       <% end %>
     </div>
     <br/>
-    <%= link_to "Add..", "#q_add_answer" %>
+    <%#= link_to "Add..", "#q_add_answer" %>
+
+
 
     <br/> <br/> <br/>
     <div class="form-actions">

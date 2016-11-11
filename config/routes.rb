@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
   root to: 'home#show'
   resource :dashboard
 
-  resources :questionnaires
+  resources :qsets do
+    get 'start', on: :member
+  end
+
+  resources :questions do
+    get 'autocomplete', on: :collection
+  end
 
   resources :folders do
     resources :images do

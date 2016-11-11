@@ -1,9 +1,9 @@
-class CreateQuestionnaires < ActiveRecord::Migration[5.0]
+class CreateQuestions < ActiveRecord::Migration[5.0]
   def change
-    enable_extension "hstore"
-    create_table :questionnaires do |t|
+      create_table :questions do |t|
       t.string  :question
       t.integer :owner_id, null: false
+      t.references :qset
       t.integer :value
       t.timestamps
     end

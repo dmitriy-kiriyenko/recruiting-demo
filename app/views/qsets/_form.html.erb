@@ -1,0 +1,24 @@
+<%= simple_form_for(@qset) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name %>
+    </div>
+
+
+    <h3>QESTIONS</h3>
+
+    Select Questions
+    <% options = Question.all.map { |q| [q.question, q.id] }; sel_options = @qset.questions.map { |u| u.id } %>
+    <%= select_tag(:report_id2, options_for_select(options, sel_options), name: 'qset[questions_ids][]', multiple: true) %>
+
+    <br/>
+    Assigned Users
+    <% options = User.all.map { |u| [u.email, u.id] }; sel_options = @qset.users.map { |u| u.id } %>
+    <%= select_tag(:report_id2, options_for_select(options, sel_options), name: 'qset[users_ids][]', multiple: true) %>
+
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>

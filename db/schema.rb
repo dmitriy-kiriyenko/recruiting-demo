@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111094903) do
+ActiveRecord::Schema.define(version: 20161111131529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -33,12 +32,12 @@ ActiveRecord::Schema.define(version: 20161111094903) do
   end
 
   create_table "answers", force: :cascade do |t|
-    t.integer  "questionnaire_id", null: false
+    t.integer  "question_id", null: false
     t.string   "answer"
     t.integer  "correct"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["questionnaire_id"], name: "index_answers_on_questionnaire_id", using: :btree
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -63,12 +62,30 @@ ActiveRecord::Schema.define(version: 20161111094903) do
     t.index ["folder_id"], name: "index_images_on_folder_id", using: :btree
   end
 
-  create_table "questionnaires", force: :cascade do |t|
+  create_table "qsets", force: :cascade do |t|
+    t.integer  "owner_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_qsets", force: :cascade do |t|
+    t.integer  "question_id", null: false
+    t.integer  "qset_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["qset_id"], name: "index_question_qsets_on_qset_id", using: :btree
+    t.index ["question_id"], name: "index_question_qsets_on_question_id", using: :btree
+  end
+
+  create_table "questions", force: :cascade do |t|
     t.string   "question"
     t.integer  "owner_id",   null: false
+    t.integer  "qset_id"
     t.integer  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["qset_id"], name: "index_questions_on_qset_id", using: :btree
   end
 
   create_table "rights", force: :cascade do |t|
@@ -105,13 +122,13 @@ ActiveRecord::Schema.define(version: 20161111094903) do
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
-  create_table "user_questionnaires", force: :cascade do |t|
-    t.integer  "user_id",          null: false
-    t.integer  "questionnaire_id", null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["questionnaire_id"], name: "index_user_questionnaires_on_questionnaire_id", using: :btree
-    t.index ["user_id"], name: "index_user_questionnaires_on_user_id", using: :btree
+  create_table "user_qsets", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "qset_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["qset_id"], name: "index_user_qsets_on_qset_id", using: :btree
+    t.index ["user_id"], name: "index_user_qsets_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

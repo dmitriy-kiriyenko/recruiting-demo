@@ -14,10 +14,10 @@ class User < ApplicationRecord
   has_many :folders, through: :rights
   has_many :images, through: :folders
 
-  has_many :my_questionnaires, foreign_key: :owner_id, class_name: Questionnaire,  dependent: :destroy
+  has_many :my_questions, foreign_key: :owner_id, class_name: Question,  dependent: :destroy
 
-  has_many :user_questionnaires, dependent: :destroy
-  has_many :questionnaires, through: :user_questionnaires
+  has_many :user_qsets, dependent: :destroy
+  has_many :qsets, through: :user_qsets
 
   def username
     email.split('@').first
