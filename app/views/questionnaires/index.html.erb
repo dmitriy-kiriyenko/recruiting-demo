@@ -1,0 +1,31 @@
+<h1>My Questionnaires</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Value</th>
+      <th>Assigned to</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questionnaires.each do |questionnaire| %>
+      <tr>
+        <td><%= questionnaire.question %></td>
+        <td><%= questionnaire.value %></td>
+        <td><%= questionnaire.users.map{|u| u.email}.join(', ') %></td>
+        <td><%= link_to 'Show', questionnaire %></td>
+        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
+        <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'New Questionnaire', new_questionnaire_path %>
+
+
+

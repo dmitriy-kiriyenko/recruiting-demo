@@ -1,0 +1,32 @@
+<%= simple_form_for(@questionnaire) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :question %>
+      <%= f.input :value %>
+    </div>
+
+
+
+    <h3>Answers</h3>
+
+    <div class="answers">
+
+      <%= f.fields_for :answers do |ans_f| %>
+          <div class="answer">
+             <%= ans_f.text_field :answer %>
+            <%= ans_f.label :correct %><%= ans_f.check_box :correct, class: "q_correct" %>
+            <% if ans_f.object && ans_f.object.persisted? %>
+                <%= ans_f.label :_destroy, 'remove' %> <%= ans_f.check_box :_destroy %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+    <br/>
+    <%= link_to "Add..", "#q_add_answer" %>
+
+    <br/> <br/> <br/>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>

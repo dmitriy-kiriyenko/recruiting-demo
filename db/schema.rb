@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111075043) do
+ActiveRecord::Schema.define(version: 20161111094903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -29,6 +30,15 @@ ActiveRecord::Schema.define(version: 20161111075043) do
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
     t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "questionnaire_id", null: false
+    t.string   "answer"
+    t.integer  "correct"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["questionnaire_id"], name: "index_answers_on_questionnaire_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -51,6 +61,14 @@ ActiveRecord::Schema.define(version: 20161111075043) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["folder_id"], name: "index_images_on_folder_id", using: :btree
+  end
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.string   "question"
+    t.integer  "owner_id",   null: false
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rights", force: :cascade do |t|
@@ -85,6 +103,15 @@ ActiveRecord::Schema.define(version: 20161111075043) do
     t.string  "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  end
+
+  create_table "user_questionnaires", force: :cascade do |t|
+    t.integer  "user_id",          null: false
+    t.integer  "questionnaire_id", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["questionnaire_id"], name: "index_user_questionnaires_on_questionnaire_id", using: :btree
+    t.index ["user_id"], name: "index_user_questionnaires_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

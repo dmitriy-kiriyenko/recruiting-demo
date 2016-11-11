@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   root to: 'home#show'
   resource :dashboard
+
+  resources :questionnaires
+
   resources :folders do
     resources :images do
       resources :comments
