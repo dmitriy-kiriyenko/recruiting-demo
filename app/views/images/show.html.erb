@@ -1,0 +1,25 @@
+<h1>
+  <%= link_to folder.name, folder %>
+  /
+  <%= @image.name %>
+</h1>
+
+<%= link_to 'Edit', [:edit, folder, @image] %>
+
+<br>
+
+<%= image_tag @image.file.url %>
+
+<hr />
+
+<h3>Comments</h3>
+
+<%= simple_form_for [folder, @image, Comment.new] do |f| %>
+  <%= f.input :body, as: :string, label: false %>
+  <br/>
+  <%= f.submit 'Add Comment' %>
+<% end %>
+
+<ul>
+  <%= render partial: 'comments/comment', collection: @image.comments %>
+</ul>

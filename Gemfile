@@ -17,9 +17,7 @@ gem 'acts-as-taggable-on'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-
-group :development, :test do
-end
+gem 'faker'
 
 group :development do
   gem 'listen', '~> 3.0.5'

@@ -1,7 +1,11 @@
 class Image < ApplicationRecord
-  validates :file, presence: true
+  has_many :comments, as: :commentable
+
   belongs_to :folder
+
   acts_as_taggable_on :labels
+
+  validates :file, presence: true
 
   mount_uploader :file, ImageUploader
 

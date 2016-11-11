@@ -1,7 +1,9 @@
 <h1>
   <%= link_to folder.name, folder %>
   /
-  <%= @image.name %></h1>
+  <%= link_to @image.name, [folder, @image] %>
+</h1>
+
 <%= image_tag @image.file.url %>
 
 <%= simple_form_for [:folder, @image] do |f| %>

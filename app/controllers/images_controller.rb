@@ -2,6 +2,10 @@ class ImagesController < ApplicationController
   respond_to :html
   helper_method :folder
 
+  def show
+    @image = find_image
+  end
+
   def edit
     @image = find_image
   end
