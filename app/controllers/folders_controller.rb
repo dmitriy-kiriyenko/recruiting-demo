@@ -29,7 +29,7 @@ class FoldersController < ApplicationController
   end
 
   def destroy
-    folder.delete_folder!
+    Folder::Delete.(folder)
     flash[:notice] = 'Folder removed'
 
     respond_with folder
