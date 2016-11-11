@@ -1,20 +1,29 @@
 class QsetsController < ApplicationController
   before_action :authenticate_user!
-
   before_action :set_qset, only: [:edit, :update, :destroy]
+  before_action :get_user_qset, only: [:start, :finish]
+
   respond_to :html
 
 
   def start
-    @qset = Qset.find(params[:id])
+    if @uqs.started_at.nil?
+      @uqs.started_at = DateTime.now
+      @uqs.save
+    end
   end
 
   def finish
+    if DateTime.now.to_i - @uqs.started_at.to_i > 60 * 60  # 60 min
+      render plain: "Sorry, too late..."
+      return
+    end
     total_value = 0
-    params[:questions].keys.each do |question_id|
-      puts "Key #{question_id} ANS ID: #{params[:questions][question_id]}"
-      answer = Answer.where(id: params[:questions][question_id]).first
-      total_value += answer.question.value if answer && answer.correct?
+    if params[:questions] && params[:questions].keys
+      params[:questions].keys.each do |question_id|
+        answer = Answer.where(id: params[:questions][question_id]).first
+        total_value += answer.question.value if answer && answer.correct?
+      end
     end
     render plain: total_value
   end
@@ -55,6 +64,13 @@ class QsetsController < ApplicationController
   end
 
   private
+
+  def get_user_qset
+    @qset = Qset.find(params[:id])
+    @uqs = UserQset.where(user_id: current_user.id, qset_id: @qset.id).first
+    raise "Not allowed" unless @uqs
+  end
+
 
   def set_assigned_models
     @qset.questions = Question.where(id: params[:qset][:questions_ids])
