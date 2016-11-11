@@ -18,13 +18,15 @@ gem 'public_activity', git: 'https://github.com/chaps-io/public_activity.git'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'faker'
+gem 'toastr-rails'
 
 group :development do
   gem 'listen', '~> 3.0.5'
 
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  gem 'faker'
 
   gem 'pry-rails'
   gem 'pry',        require: false
