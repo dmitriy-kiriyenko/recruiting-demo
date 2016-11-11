@@ -59,7 +59,7 @@ class QuestionnairesController < ApplicationController
   end
 
   def set_questionnaire
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = scope.find(params[:id]) 
   end
 
 
