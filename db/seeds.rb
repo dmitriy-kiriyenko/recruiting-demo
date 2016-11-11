@@ -37,4 +37,18 @@ comment1 = image1.comments.create(body: Faker::Name.title)
 comment1.comments.create(body: Faker::Name.title)
 comment1.comments.create(body: Faker::Name.title)
 
+
+Qset.create(name: 'how great our joy', owner_id: user1.id)
+
+question1 = Question.new(value: 2, owner_id: user1.id, question: 'First question')
+question1.answers.build(answer: 'Correct Answer1', correct: true )
+question1.answers.build(answer: 'Wrong Answer2', correct: false)
+question1.answers.build(answer: 'Wrong Answer3', correct: false)
+question1.save
+
+question2 = Question.new(value: 2, owner_id: user1.id, question: 'Second question')
+question1.answers.build(answer: 'Correct Answer1', correct: true)
+question2.answers.build(answer: 'Wrong Answer2', correct: false)
+question2.save
+
 puts 'Updated...'

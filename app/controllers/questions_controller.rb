@@ -1,15 +1,11 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
   respond_to :html
 
 
   def index
     @questions = scope.all
-  end
-
-
-  def show
   end
 
 
@@ -25,10 +21,10 @@ class QuestionsController < ApplicationController
 
 
   def create
-    @question = Question.new(questionnaire_params)
-    @question.owner_id = current_user.id
+    @question = Question.new(questionnaire_params.merge({ owner_id: current_user.id }))
+
     if @question.save
-      redirect_to @question, notice: 'Questionnaire was successfully created.'
+      redirect_to questions_path, notice: 'Questionnaire was successfully created.'
     else
       render :new
     end
@@ -48,9 +44,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questionnaires_url, notice: 'Questionnaire was successfully destroyed.' }
-    end
+    redirect_to questionnaires_url, notice: 'Questionnaire was successfully destroyed.'
   end
 
   private

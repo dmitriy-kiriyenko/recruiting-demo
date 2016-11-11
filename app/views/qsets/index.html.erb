@@ -1,19 +1,17 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Qsets</h1>
 
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th>Qset name</th>
+      <th colspan='2'>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @qsets.each do |qset| %>
       <tr>
-
-        <td><%= link_to qset.name, qset %></td>
+        <td><%= qset.name %></td>
         <td><%= link_to 'Edit', edit_qset_path(qset) %></td>
         <td><%= link_to 'Destroy', qset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -22,7 +20,8 @@
 </table>
 
 <br>
-
+<%= link_to 'New Question', new_question_path %>
+<br>
 <%= link_to 'New Qset', new_qset_path %>
 
 

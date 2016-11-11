@@ -1,5 +1,7 @@
 class QsetsController < ApplicationController
-  before_action :set_qset, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
+  before_action :set_qset, only: [:edit, :update, :destroy]
   respond_to :html
 
 
@@ -21,9 +23,6 @@ class QsetsController < ApplicationController
     @qsets = Qset.all
   end
 
-  def show
-  end
-
   def new
     @qset = Qset.new
   end
@@ -35,7 +34,7 @@ class QsetsController < ApplicationController
     @qset = Qset.new(qset_params)
     if @qset.save
       set_assigned_models
-      redirect_to @qset, notice: 'Qset was successfully created.'
+      redirect_to qsets_path, notice: 'Qset was successfully created.'
     else
       render :new
     end
@@ -44,7 +43,7 @@ class QsetsController < ApplicationController
   def update
     if @qset.update(qset_params)
       set_assigned_models
-      redirect_to @qset, notice: 'Qset was successfully updated.'
+      redirect_to qsets_path, notice: 'Qset was successfully updated.'
     else
       render :edit
     end
@@ -52,10 +51,7 @@ class QsetsController < ApplicationController
 
   def destroy
     @qset.destroy
-    respond_to do |format|
-      format.html { redirect_to qsets_url, notice: 'Qset was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to qsets_url, notice: 'Qset was successfully destroyed.'
   end
 
   private
