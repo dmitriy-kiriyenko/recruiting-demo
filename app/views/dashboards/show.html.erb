@@ -1,8 +1,7 @@
 <h1>Dashboard</h1>
 
 <% if @activities.any? %>
+  <%= render_activities(@activities) %>
 <% else %>
-  <p>
-    No activities. Maybe go <%= link_to "manage you files", folders_path %>.
-  </p>
+  <p>No activities. Maybe go <%= link_to "manage you files", folders_path %>.</p>
 <% end %>
