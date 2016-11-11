@@ -12,6 +12,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'carrierwave'
 gem 'active_attr'
+gem 'acts-as-taggable-on'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'

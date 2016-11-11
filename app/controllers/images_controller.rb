@@ -3,11 +3,17 @@ class ImagesController < ApplicationController
   helper_method :folder
 
   def edit
-    @image = folder.images.find params[:id]
+    @image = find_image
+  end
+
+  def update
+    @image = find_image
+    @image.update(image_params)
+    respond_with(@image, location: [:edit, folder, @image])
   end
 
   def create
-    @image = folder.images.create folder_params
+    @image = folder.images.create(image_params)
     respond_with(@image, location: folder_url(folder))
   end
 
@@ -23,8 +29,12 @@ class ImagesController < ApplicationController
     @_folder ||= current_user.folders.find(params[:folder_id])
   end
 
-  def folder_params
-    params.require(:image).permit(:file)
+  def find_image
+    folder.images.find params[:id]
+  end
+
+  def image_params
+    params.require(:image).permit(:file, :label_list)
   end
 
 end
