@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :images do
       delete :bulk_delete, on: :collection
     end
+    resources :rights
   end
 end

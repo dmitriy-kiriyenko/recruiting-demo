@@ -1,38 +1,42 @@
 class FoldersController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
-  helper_method :folder
 
   def index
     @folders = scope.all
   end
 
   def show
+    @folder = find_folder
   end
 
   def new
   end
 
   def create
-    respond_with(folder)
+    @folder = scope.create(folder_params)
+
+    respond_with folder
   end
 
   def edit
   end
 
   def update
-    if folder.update_attributes(folder_params)
+    @folder = find_folder
+    if @folder.update_attributes(folder_params)
       flash[:notice] =  'Folder updated'
     end
 
-    respond_with folder
+    respond_with @folder
   end
 
   def destroy
-    Folder::Delete.(folder)
+    @folder = find_folder
+    Folder::Delete.(@folder)
     flash[:notice] = 'Folder removed'
 
-    respond_with folder
+    respond_with @folder
   end
 
   private
@@ -41,8 +45,8 @@ class FoldersController < ApplicationController
     current_user.folders
   end
 
-  def folder
-    @_folder ||= scope.find(params[:id])
+  def find_folder
+    scope.find(params[:id])
   end
 
   def folder_params

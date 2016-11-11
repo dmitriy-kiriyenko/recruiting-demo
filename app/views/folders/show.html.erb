@@ -1,10 +1,11 @@
 <p><%= link_to 'Back to your folders', folders_path %></p>
-<h1><%= folder.name %></h1>
+<h1><%= @folder.name %></h1>
+<p>Users with access: <%= @folder.users.map(&:email).to_sentence %></p>
 
 <hr />
 <h2>Upload new file:</h2>
 
-<%= simple_form_for [folder, Image.new] do |f| %>
+<%= simple_form_for [@folder, Image.new] do |f| %>
   <%= f.input :file, label: false %>
   <%= f.submit 'Upload' %>
 <% end %>
@@ -12,9 +13,9 @@
 <hr />
 <h2>Files:</h2>
 
-<%= form_tag bulk_delete_folder_images_path(folder.id), method: :delete do %>
+<%= form_tag bulk_delete_folder_images_path(@folder.id), method: :delete do %>
   <ul>
-    <% folder.images.each do |image| %>
+    <% @folder.images.each do |image| %>
       <li>
         <%= check_box_tag 'image_ids[]', image.id, false, id: "image_ids_#{image.id}" %>
         <%= label_tag "image_ids_#{image.id}", image_tag( image.file.url, size: '100x100') %>

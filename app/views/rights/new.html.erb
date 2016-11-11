@@ -1,0 +1,6 @@
+<h1>Invite users to <%= folder.name %></h1>
+
+<%= simple_form_for @invitation, url: folder_rights_path do |f| %>
+  <%= f.input :emails %>
+  <%= f.submit 'Invite' %>
+<% end %>

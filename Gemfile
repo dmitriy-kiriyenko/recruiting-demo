@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'simple_form'
 gem 'carrierwave'
+gem 'active_attr'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
