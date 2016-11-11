@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#show'
   resources :folders do
     resources :images do
-      collection do
-        delete :multi_delete
-      end
+      delete :bulk_delete, on: :collection
     end
   end
 end

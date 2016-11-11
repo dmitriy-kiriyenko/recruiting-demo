@@ -6,8 +6,8 @@ class ImagesController < ApplicationController
     respond_with(@image, location: folder_url(folder))
   end
 
-  def multi_delete
-    folder.images.where(id: multi_delete_params[:image_ids]).destroy_all
+  def bulk_delete
+    folder.images.where(id: Array.wrap(params[:image_ids])).destroy_all
 
     redirect_to folder_url(folder)
   end
@@ -22,7 +22,4 @@ class ImagesController < ApplicationController
     params.require(:image).permit(:file)
   end
 
-  def multi_delete_params
-    params.permit(image_ids: [])
-  end
 end
