@@ -11,15 +11,17 @@ class FoldersController < ApplicationController
   end
 
   def new
+    @folder = scope.build
   end
 
   def create
     @folder = scope.create(folder_params)
 
-    respond_with folder
+    respond_with @folder
   end
 
   def edit
+    @folder = find_folder
   end
 
   def update

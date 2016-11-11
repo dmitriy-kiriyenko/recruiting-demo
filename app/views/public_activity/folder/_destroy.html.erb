@@ -1,0 +1,6 @@
+<li>
+  <strong><%= activity.owner.username %></strong>
+  deleted a folder
+  <strong><%= activity.parameters[:name_was] %></strong>
+  <%= time_ago_in_words activity.created_at %> ago
+</li>

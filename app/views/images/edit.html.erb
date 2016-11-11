@@ -6,7 +6,7 @@
 
 <%= image_tag @image.file.url %>
 
-<%= simple_form_for [:folder, @image] do |f| %>
+<%= simple_form_for [folder, @image] do |f| %>
   <%= f.input :label_list %>
   <%= f.submit %>
 <% end %>

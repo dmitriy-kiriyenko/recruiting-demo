@@ -1,6 +1,6 @@
 class Image < ApplicationRecord
   include PublicActivity::Model
-  tracked
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   has_many :comments, as: :commentable
 

@@ -1,0 +1,8 @@
+<li>
+  <strong><%= activity.owner.username %></strong>
+  uploaded a file
+  <%= link_to activity.trackable.name, [activity.trackable.folder, activity.trackable] %>
+  /
+  <%= link_to activity.trackable.folder.name, activity.trackable.folder %>
+  <%= time_ago_in_words activity.created_at %> ago
+</li>

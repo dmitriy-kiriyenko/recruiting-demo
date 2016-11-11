@@ -1,0 +1,10 @@
+<% if activity.trackable %>
+  <li>
+    <strong><%= activity.owner.username %></strong>
+    renamed a folder
+    <strong><%= activity.parameters[:name_was] %></strong>
+    to
+    <%= link_to activity.trackable.name, activity.trackable %>
+    <%= time_ago_in_words activity.created_at %> ago
+  </li>
+<% end %>

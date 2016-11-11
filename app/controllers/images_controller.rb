@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
   def update
     @image = find_image
     @image.update(image_params)
-    respond_with(@image, location: [:edit, folder, @image])
+    respond_with(@image, location: [folder, @image])
   end
 
   def create
