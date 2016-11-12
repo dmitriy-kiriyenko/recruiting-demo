@@ -1,0 +1,30 @@
+<h3>Test started at: <%= @assignment.start_at.to_formatted_s(:db)  %></h3>
+<h3>Test will be finished at: <%= @assignment.finish_at.to_formatted_s(:db)  %></h3>
+
+<br />
+<br />
+
+<%= form_for @assignment, url: assignment_path(@assignment.id), method: :patch do |f| %>
+
+  <% @assignment.survey.questions.each do |question| %>
+
+    <%= f.fields_for :recipient_answers, @assignment.recipient_answers.where(question_id: question.id).first_or_initialize do |ff| %>
+      <fieldset>
+        <p><strong>Question: </strong><%= question.content %></p>
+        <p><strong>Value of the right answer: </strong><%= question.weight %></p>
+        <hr>
+        <%= ff.hidden_field :question_id, value: question.id %>
+
+        <%- question.answers.each do |answer| %>
+          <p>
+            <strong>Answer: </strong><%= answer.content %>
+            <%= ff.radio_button :answer_id, answer.id %>
+          </p>
+        <% end %>
+      </fieldset>
+    <% end %>
+  <% end %>
+
+  <%= submit_tag 'Update your answers' %>
+<% end %>
+

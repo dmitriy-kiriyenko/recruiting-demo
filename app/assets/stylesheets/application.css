@@ -14,3 +14,18 @@
  *= require_self
  *= require toastr
  */
+
+fieldset {
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.correct {
+  background-color: #8fbc8f;
+}
+.picked {
+  background-color: #ffe4c4;
+}
+.correct.picked {
+  border: 1px solid green;
+}

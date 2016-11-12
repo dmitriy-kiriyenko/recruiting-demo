@@ -1,0 +1,16 @@
+<h3>Questionary: <%= @survey.name %></h3>
+
+<%- @survey.questions.each do |question| %>
+  <fieldset>
+    <p><strong>Question: </strong><%= question.content %></p>
+    <p><strong>Value of the right answer: </strong><%= question.weight %></p>
+    <hr>
+    <%- question.answers.each do |answer| %>
+      <p class="<%= 'correct' if answer.is_correct %>">
+        <strong>Answer:</strong><%= answer.content %>
+      </p>
+    <% end %>
+  </fieldset>
+<% end %>
+
+<%= link_to 'Edit', edit_survey_path(@survey) %>

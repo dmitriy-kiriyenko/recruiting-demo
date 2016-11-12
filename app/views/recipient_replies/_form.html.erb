@@ -1,0 +1,11 @@
+<%= form_for @recipient_reply do |f| %>
+
+  <%= f.collection_select :user_id, available_users, :id, :email %>
+  <br />
+  <%= f.collection_select :survey_id, available_surveys, :id, :name %>
+
+  <br />
+  <br />
+
+  <%= f.submit 'Create new questionnaires assignments' %>
+<% end %>

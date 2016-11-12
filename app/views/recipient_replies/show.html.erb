@@ -1,0 +1,20 @@
+<hr />
+<p><strong>Recipient email: </strong><%= @recipient_reply.user.email %></p>
+<p><strong>Survey name: </strong><%= @recipient_reply.survey.name %></p>
+
+
+<%- @recipient_reply.survey.questions.each do |question| %>
+  <fieldset>
+    <p><strong>Question: </strong><%= question.content %></p>
+    <p><strong>Value of the right answer: </strong><%= question.weight %></p>
+    <hr>
+    <%- question.answers.each do |answer| %>
+      <p class="<%= 'correct' if answer.is_correct %> <%= 'picked' if @recipient_answers.get_answer_for(question.id) == answer.id %> ">
+        <strong>Answer:</strong><%= answer.content %>
+      </p>
+    <% end %>
+  </fieldset>
+<% end %>
+
+
+<%= link_to 'Back', :back %>

@@ -10,6 +10,10 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        confirmation: { allow_blank: true }
 
+  has_many :surveys
+  has_many :recipient_replies, foreign_key: :owner_id
+  has_many :assignments, foreign_key: :user_id, class_name: 'RecipientReply'
+
   has_many :rights, dependent: :destroy
   has_many :folders, through: :rights
   has_many :images, through: :folders

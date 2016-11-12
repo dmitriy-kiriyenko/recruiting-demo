@@ -11,6 +11,7 @@ end
 
 user1 = User.create(email: 'a@a.a', password: '111')
 user2 = User.create(email: 'b@b.b', password: '111')
+user3 = User.create(email: 'c@c.c', password: '111')
 
 set_public_activity_user user1
 folder1 = user1.folders.create(name: 'First folder')
@@ -39,5 +40,21 @@ comment1 = image1.comments.create(body: Faker::Name.title, user_id: user1.id)
 
 comment1.comments.create(body: Faker::Name.title, user_id: user1.id)
 comment1.comments.create(body: Faker::Name.title, user_id: user1.id)
+
+
+# Surveys:
+survey1 = Survey.new(name: Faker::Name.title, user_id: user1.id)
+
+question1 = survey1.questions.build(survey_id: survey1.id, content: Faker::Name.title, weight: Faker::Number.between(1, 10))
+question2 = survey1.questions.build(survey_id: survey1.id, content: Faker::Name.title, weight: Faker::Number.between(1, 10))
+
+question1.answers.build(content: Faker::Name.title, is_correct: true)
+question1.answers.build(content: Faker::Name.title, is_correct: false)
+question1.answers.build(content: Faker::Name.title, is_correct: false)
+
+question2.answers.build(content: Faker::Name.title, is_correct: true)
+question2.answers.build(content: Faker::Name.title, is_correct: false)
+
+survey1.save!
 
 puts 'Updated...'
