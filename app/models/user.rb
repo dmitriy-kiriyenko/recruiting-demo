@@ -10,6 +10,8 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        confirmation: { allow_blank: true }
 
+  has_many :surveys
+
   has_many :rights, dependent: :destroy
   has_many :folders, through: :rights
   has_many :images, through: :folders

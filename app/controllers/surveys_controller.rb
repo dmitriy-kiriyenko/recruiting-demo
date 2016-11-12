@@ -2,19 +2,19 @@ class SurveysController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @surveys = Survey.all
+    @surveys = scope.all
   end
 
   def show
-    @survey = Survey.find(params[:id])
+    @survey = find_survey
   end
 
   def new
-    @survey = Survey.new
+    @survey = scope.build
   end
 
   def create
-    @survey = Survey.new(survey_params)
+    @survey = scope.build(survey_params)
 
     if @survey.save
       redirect_to @survey, notice: "Successfully created survey."
@@ -24,11 +24,11 @@ class SurveysController < ApplicationController
   end
 
   def edit
-    @survey = Survey.find(params[:id])
+    @survey = find_survey
   end
 
   def update
-    @survey = Survey.find(params[:id])
+    @survey = find_survey
     if @survey.update_attributes(survey_params)
       redirect_to @survey, notice: 'Successfully updated survey.'
     else
@@ -37,14 +37,19 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    @survey = Survey.find(params[:id])
+    @survey = find_survey
     @survey.destroy
     redirect_to surveys_url, notice: 'Successfully destroyed survey.'
   end
 
   private
-  def set_survey
-    @survey = Survey.find(params[:id])
+
+  def scope
+    current_user.surveys
+  end
+
+  def find_survey
+    scope.find(params[:id])
   end
 
   def survey_params

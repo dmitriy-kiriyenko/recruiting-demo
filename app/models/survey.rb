@@ -1,5 +1,6 @@
 class Survey < ActiveRecord::Base
   has_many :questions, dependent: :destroy, inverse_of: :survey
+  belongs_to :user
 
   accepts_nested_attributes_for :questions, reject_if: proc { |attributes| attributes[:content].blank? }
 

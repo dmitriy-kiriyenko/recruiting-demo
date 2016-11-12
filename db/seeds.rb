@@ -42,7 +42,7 @@ comment1.comments.create(body: Faker::Name.title, user_id: user1.id)
 
 
 # Surveys:
-survey1 = Survey.new(name: Faker::Name.title)
+survey1 = Survey.new(name: Faker::Name.title, user_id: user1.id)
 
 question1 = survey1.questions.build(survey_id: survey1.id, content: Faker::Name.title, weight: Faker::Number.between(1, 10))
 question2 = survey1.questions.build(survey_id: survey1.id, content: Faker::Name.title, weight: Faker::Number.between(1, 10))
