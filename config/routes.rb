@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :surveys
+
   mount ActionCable.server => '/cable'
 
   devise_for :users

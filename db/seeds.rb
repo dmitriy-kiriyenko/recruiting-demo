@@ -40,4 +40,20 @@ comment1 = image1.comments.create(body: Faker::Name.title, user_id: user1.id)
 comment1.comments.create(body: Faker::Name.title, user_id: user1.id)
 comment1.comments.create(body: Faker::Name.title, user_id: user1.id)
 
+
+# Surveys:
+survey1 = Survey.new(name: Faker::Name.title)
+
+question1 = survey1.questions.build(survey_id: survey1.id, content: Faker::Name.title, weight: Faker::Number.between(1, 10))
+question2 = survey1.questions.build(survey_id: survey1.id, content: Faker::Name.title, weight: Faker::Number.between(1, 10))
+
+question1.answers.build(content: Faker::Name.title, is_correct: true)
+question1.answers.build(content: Faker::Name.title, is_correct: false)
+question1.answers.build(content: Faker::Name.title, is_correct: false)
+
+question2.answers.build(content: Faker::Name.title, is_correct: true)
+question2.answers.build(content: Faker::Name.title, is_correct: false)
+
+survey1.save!
+
 puts 'Updated...'

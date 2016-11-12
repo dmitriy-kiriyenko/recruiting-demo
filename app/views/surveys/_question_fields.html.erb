@@ -1,0 +1,17 @@
+<fieldset>
+  <p>
+    <%= f.label :content, 'Question' %><br />
+    <%= f.text_area :content, rows: 3 %><br />
+  </p>
+
+  <p>
+    <%= f.label :content, 'Value of the right answer:' %><br />
+    <%= f.number_field :weight %><br />
+  </p>
+
+  <%= f.fields_for :answers do |builder| %>
+    <%= render 'answer_fields', f: builder %>
+  <% end %>
+
+  <%= link_to_add_fields 'Add Answer', f, :answers %>
+</fieldset>
