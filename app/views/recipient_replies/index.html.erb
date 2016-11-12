@@ -1,0 +1,25 @@
+<h1>Questionnaires assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Survey name</th>
+      <th>User email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipient_replies.each do |rr| %>
+      <tr>
+        <td><%= rr.survey.name %></td>
+        <td><%= rr.user.email %></td>
+        <td><%= link_to 'Show', recipient_reply_path(rr) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assignment', new_recipient_reply_path %>

@@ -11,6 +11,7 @@ class User < ApplicationRecord
                        confirmation: { allow_blank: true }
 
   has_many :surveys
+  has_many :recipient_replies, foreign_key: :owner_id
 
   has_many :rights, dependent: :destroy
   has_many :folders, through: :rights

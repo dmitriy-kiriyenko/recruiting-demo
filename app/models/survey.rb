@@ -1,4 +1,6 @@
 class Survey < ActiveRecord::Base
+  has_many :recipient_replies
+
   has_many :questions, dependent: :destroy, inverse_of: :survey
   belongs_to :user
 

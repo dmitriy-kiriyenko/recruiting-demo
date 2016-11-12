@@ -11,6 +11,7 @@ end
 
 user1 = User.create(email: 'a@a.a', password: '111')
 user2 = User.create(email: 'b@b.b', password: '111')
+user3 = User.create(email: 'c@c.c', password: '111')
 
 set_public_activity_user user1
 folder1 = user1.folders.create(name: 'First folder')
