@@ -5,6 +5,7 @@ class CreateTableRecipientReply < ActiveRecord::Migration[5.0]
       t.references :survey
 
       t.integer :owner_id
+      t.datetime :start_at
 
       t.timestamps
     end

@@ -17,9 +17,8 @@ class RecipientRepliesController < ApplicationController
 
   def show
     @recipient_reply = find_recipient_reply
+    @recipient_answers = @recipient_reply.recipient_answers
   end
-
-
 
   private
 

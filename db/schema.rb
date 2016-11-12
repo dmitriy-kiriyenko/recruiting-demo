@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112160715) do
+ActiveRecord::Schema.define(version: 20161112175253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,10 +70,18 @@ ActiveRecord::Schema.define(version: 20161112160715) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "recipient_answers", force: :cascade do |t|
+    t.integer "recipient_reply_id"
+    t.integer "question_id"
+    t.integer "answer_id"
+    t.index ["recipient_reply_id"], name: "index_recipient_answers_on_recipient_reply_id", using: :btree
+  end
+
   create_table "recipient_replies", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "survey_id"
     t.integer  "owner_id"
+    t.datetime "start_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["survey_id"], name: "index_recipient_replies_on_survey_id", using: :btree

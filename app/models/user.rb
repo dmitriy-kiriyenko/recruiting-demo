@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   has_many :surveys
   has_many :recipient_replies, foreign_key: :owner_id
+  has_many :assignments, foreign_key: :user_id, class_name: 'RecipientReply'
 
   has_many :rights, dependent: :destroy
   has_many :folders, through: :rights

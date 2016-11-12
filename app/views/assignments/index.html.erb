@@ -1,0 +1,22 @@
+<h1>Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan='2'></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.survey.name %></td>
+        <% if assignment.is_finished? %>
+          <td><strong>Finished</strong></td>
+        <% else %>
+          <td><strong><%= link_to 'Start', assignment_start_path(assignment), method: :post %></strong></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :surveys
   resources :recipient_replies
+  resources :assignments, only: [:index, :edit, :update] do
+    post :start
+  end
 
   mount ActionCable.server => '/cable'
 
